@@ -30,7 +30,12 @@ def youtube():  # put application's code here
     print(videourl)
     if videourl :
         get_all_video_url(videourl)
-        return render_template("youtube.html",result = videourl)
+        context = {
+            'videourl':videourl
+        }
+        return jsonify({'videourl':videourl})
+    return jsonify({'error': 'Missing data!'})
+        # return render_template("youtube.html",result = videourl)
 
     return jsonify({'error':"Missing data!"})
 

@@ -1,42 +1,29 @@
 $(document).ready(function(){
   $("#videourl").on('submit',function(event){
-    $('#preloader').show();
-  //     var name = $('#urlid').val()
-  //   $.ajax({
-  //         url:"/video_url",
-  //         type:"POST",
-  //         data: {
-  //             videourl:$('#urlid').val()
-  //               },
-  //      //  beforeSend:function (){
-  //      //        $('#preloader').show();
-  //      //  },
-  //      //
-  //      success: function(response){
-  //
-  //        data = response.result
-  //          console.log(data)
-  //          for(i=0;i<data.length;i++){
-  //              $('#name').load('youtube.html')
-  //          }
-  //      },
-  //      // complete:function(data){
-  //      //  // Hide image container
-  //      // }
-  //     }).done(function(data) {
-  //           if (data.error) {
-  //               // $("#loader").hide();
-  //               $('#errorAlert').text(data.error).show();
-  //               $('#successAlert').hide();
-  //           }
-  //           else {
-  //               // $("#loader").hide();
-  //               $('#successAlert').text(data.name).show();
-  //               $('#errorAlert').hide();
-  //           }
-  //
-  //       });
-  //       event.preventDefault();
+      // alert($('#urlid').val())
+      // console.log($('#urlid').val())
+    // $('#preloader').show();
+  // //     var name = $('#urlid').val()
+        $.ajax({
+              url:"/video_url",
+              type:"POST",
+              data: {
+                  videourl:$('#urlid').val()
+                    }
+
+          })
+            .done(function(data) {
+          console.log(data)
+  // //       $('#video_data')
+            if (data.error) {
+                // $("#loader").hide();
+                $('#errorAlert').text(data.error).show();
+                $('#successAlert').hide();
+            }
+           $('#text').text(data.videourl)
+
+        });
+        event.preventDefault();
   });
 });
 
