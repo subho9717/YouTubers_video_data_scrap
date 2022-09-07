@@ -2,7 +2,6 @@
 import requests
 from pytube import YouTube,Channel
 from googleapiclient.discovery import build
-import pandas as pd
 from pydrive.auth import GoogleAuth
 gauth = GoogleAuth()
 gauth.LocalWebserverAuth() # Creates local webserver and auto handles authentication.

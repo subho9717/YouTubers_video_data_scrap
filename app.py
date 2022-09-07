@@ -1,16 +1,6 @@
 from flask import Flask,render_template,request,redirect,url_for,jsonify
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
-from bs4 import BeautifulSoup as bsp
-import time
-import requests
-import pandas as pd
-from tqdm import tqdm
 from pytube import YouTube
-from googleapiclient.discovery import build
-import pandas as pd
+
 from youtube_scrap import get_all_video_url
 
 
