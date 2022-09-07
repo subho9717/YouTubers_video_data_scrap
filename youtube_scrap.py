@@ -1,4 +1,3 @@
-
 import requests
 from pytube import YouTube,Channel
 from googleapiclient.discovery import build
@@ -98,7 +97,8 @@ def video_data(url_video, final_url):
                             'title':j[0],
                             'Commenter_Name': i[0],
                             'Comment': i[1],
-                            'thumbnail':encoded_string
+                            'thumbnail':encoded_string,
+                            'Video_watch_url': url_video
                             }
                     db = client['YouTube_Video_Data']
                     coll = db['YouTubers_table']
@@ -136,15 +136,20 @@ def video_data(url_video, final_url):
 
     print('successfully')
     for i in mqldata1:
-        sqlq1 = "INSERT INTO YouTubers_Table(YouTubers_Name ,Video_Link ,Video_Likes , Number_Of_Comments ,Title_Of_Video ,Thumbnail_Of_Video_Link) values (%s,%s,%s,%s,%s,%s)"
-        val = (video_author,video_link1,i[1],i[2] ,i[0] ,imglink)
-        cursor.execute(sqlq1,val)
+        sqlq1 = "INSERT INTO YouTubers_Table(YouTubers_Name ,Video_Link ,Video_Likes , Number_Of_Comments ,Title_Of_Video ,Thumbnail_Of_Video_Link,Video_watch_url) values (%s,%s,%s,%s,%s,%s,%s)"
+        val = (video_author, video_link1, i[1], i[2], i[0], imglink, url_video)
+
+        cursor.execute(sqlq1, val)
         conn.commit()
+    # return url_video
 
 def get_all_video_url(video_url):
+
     try:
+        print(video_url)
         cursor.execute("truncate YouTubers_Table")
         conn.commit()
+        print('ok')
 
         db = client['YouTube_Video_Data']
         col = db['YouTubers_table']
@@ -153,6 +158,7 @@ def get_all_video_url(video_url):
         c = Channel(video_url)
         count = 0
         for r in c:
+            print(r)
             dir = r"./media/images"
             all_files = os.listdir(dir)
             for f in all_files:
@@ -168,15 +174,18 @@ def get_all_video_url(video_url):
             final_url = str(r)
             url_video = str(r)[-11:]
             print(url_video, final_url,count)
-            video_data(url_video, final_url)
-            if count == 0:
+            data = video_data(url_video, final_url)
+
+            if count == 5:
                 break
+
             count += 1
+
             print('completed')
+            # return data
     except Exception as e:
         pass
         print(e)
     conn.close()
 
 # get_all_video_url('https://www.youtube.com/c/HiteshChoudharydotcom/videos')
-

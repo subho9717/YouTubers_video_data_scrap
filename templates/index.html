@@ -8,19 +8,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse" style="justify-content: center">
-{#          <ul class="navbar-nav mr-auto">#}
-{#            <li class="nav-item active">#}
-{#              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>#}
-{#            </li>#}
-{#            <li class="nav-item">#}
-{#              <a class="nav-link" href="#">Link</a>#}
-{#            </li>#}
-{#            <li class="nav-item">#}
-{#              <a class="nav-link disabled" href="#">Disabled</a>#}
-{#            </li>#}
-{#          </ul>#}
-          <form class="form-inline mt-2 mt-md-0"   id="videourl"  >
-              <h6>WHAT ARE YOU LOOKING FOR?</h6><br>
+          <form class="form-inline mt-2 mt-md-0"   id="videourl" action="/video_url"  method="post">
+              <h6 style="color: white">WHAT ARE YOU LOOKING FOR?</h6><br>
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="videourl" id="urlid" style="width:84%">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
@@ -29,48 +18,32 @@
       </nav>
     </header>
 
+
     <main role="main">
 
         <div class="container marketing">
 
-        <hr class="featurette-divider">
-
+        <hr class="featurette-divider" style="margin:2rem 0">
+        {% for d in data %}
         <div class="row featurette">
           <div class="col-md-7">
-              <h2 id="text" ></h2>
-            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+
+            <h5 class="featurette-heading" id="author_name" style="font-size: 25px">{{ d.1 }}</h5>
+            <p class="lead" style="font-size: 15px">Video Title : {{ d.5 }}</p>
+              <p class="lead" style="font-size: 15px">Video Url : <a href="{{ d.2 }}">{{ d.2 }}</a></p>
+              <p class="lead" style="font-size: 15px">Video Likes : {{ d.3 }}</p>
+              <p class="lead" style="font-size: 15px">Number Of Comments : {{ d.4 }}</p>
+              <p class="lead" style="font-size: 15px">Video Title : <a href="{{ d.6 }}">{{ d.6 }}</a></p>
           </div>
           <div class="col-sm-5">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            <img class="featurette-image img-fluid mx-auto" src="{{ d.6 }}" data-src="holder.js/200x200/auto" alt="Generic placeholder image" style="width: 150px;height:100px">
           </div>
+
         </div>
+            <hr>
+        {% endfor %}
 
-        <hr class="featurette-divider">
 
-        <div class="row featurette">
-          <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-          </div>
-          <div class="col-md-5 order-md-1">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-          </div>
-          <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
 
         <!-- /END THE FEATURETTES -->
 

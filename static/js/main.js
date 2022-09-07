@@ -4,26 +4,26 @@ $(document).ready(function(){
       // console.log($('#urlid').val())
     // $('#preloader').show();
   // //     var name = $('#urlid').val()
-        $.ajax({
-              url:"/video_url",
-              type:"POST",
-              data: {
-                  videourl:$('#urlid').val()
-                    }
-
-          })
-            .done(function(data) {
-          console.log(data)
-  // //       $('#video_data')
-            if (data.error) {
-                // $("#loader").hide();
-                $('#errorAlert').text(data.error).show();
-                $('#successAlert').hide();
-            }
-           $('#text').text(data.videourl)
-
-        });
-        event.preventDefault();
+  //       $.ajax({
+  //             url:"/video_url",
+  //             type:"POST",
+  //             data: {
+  //                 videourl:$('#urlid').val()
+  //                   }
+  //
+  //         })
+  //           .done(function(data) {
+  //         console.log(data)
+  // // //       $('#video_data')
+  //           if (data.error) {
+  //               // $("#loader").hide();
+  //               $('#errorAlert').text(data.error).show();
+  //               $('#successAlert').hide();
+  //           }
+  //          $('#author_name').text(data.data)
+  //
+  //       });
+  //       event.preventDefault();
   });
 });
 
