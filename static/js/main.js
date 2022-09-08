@@ -12,6 +12,6 @@ $(document).ready(function(){
 })
 
   $('#videourl').on('submit',function(){
-    $('#preloader').show()
+    // $('#preloader').show()
   })
 })
