@@ -639,3 +639,47 @@ legend {
 
   align-content: center;
 }
+
+section{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+  pointer-events: none;
+  animation: fadeout .5s linear forwards;
+  animation-delay: 8.5;
+}
+@keyframes fadeout {
+  0%
+  {
+    opacity: 1;
+  }
+  100%
+  {
+    opacity: 0;
+  }
+}
+.loader{
+  position: absolute;
+  top:0;
+  left: 0;
+  height: 100%;
+  background: #000;
+}
+.count{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 18vw;
+  color: #fff;
+  font-weight: 800;
+  mix-blend-mode: difference;
+  width:550px;
+  text-align: right;
+}
+
+
+
