@@ -1,64 +1,80 @@
-{% extends 'base.html' %}
-{% block content %}
-    <div class="s004">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    section{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: #fff;
+      pointer-events: none;
+      animation: fadeout .5s linear forwards;
+      animation-delay: 8.5;
+    }
+    @keyframes fadeout {
+      0%
+      {
+        opacity: 1;
+      }
+      100%
+      {
+        opacity: 0;
+      }
+    }
+    .loader{
+      position: absolute;
+      top:0;
+      left: 0;
+      height: 100%;
+      background: #000;
+    }
+    .count{
+      position: absolute;
+      top:50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      font-size: 18vw;
+      color: #fff;
+      font-weight: 800;
+      mix-blend-mode: difference;
+      width:550px;
+      text-align: right;
 
-      <form  action="/video_url" method="post" id="videourl">
-        <fieldset>
-          <legend>WHAT ARE YOU LOOKING FOR?</legend>
-          <div class="inner-form">
-            <div class="input-field">
-                    <input class="form-control" id = "urlid" name="videourl" type="text" placeholder="Type to search..." />
-                      <button class="btn-search"   type="submit" onclick="progressBar()" hidden>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                          <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                        </svg>
-                      </button>
-            </div>
-          </div>
+    }
 
-{#            <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>#}
+  </style>
+</head>
+<body>
+  <div class="welcome">
+    <h2>Welcome</h2>
+  </div>
+  
+  
 
+  
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-        </fieldset>
-      </form>
-        <br>
-        <div class="containor">
-                <div class="col-lg-12">
-                    <div id="video_data" style="background-color: white;">
-                        <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Handle</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td colspan="2">Larry the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                    </div>
-                </div>
-
-            </div>
-    </div>
-
-{% endblock %}
+  <script type="text/javascript">
+    $(document).ready(function(){
+        var count = 0;
+        var counter = setInterval(function(){
+        if (count < 101){
+          $('.count').text(count + '%');
+          $('.loader').css('width', count +  '%')
+          count++
+        }
+        else{
+          clearInterval(counter)
+        }
+      })
+    })
+    
+  </script>
+</body>
+</html>

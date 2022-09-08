@@ -136,6 +136,7 @@ def video_data(url_video, final_url):
 
     print('successfully')
     for i in mqldata1:
+        
         sqlq1 = "INSERT INTO YouTubers_Table(YouTubers_Name ,Video_Link ,Video_Likes , Number_Of_Comments ,Title_Of_Video ,Thumbnail_Of_Video_Link,Video_watch_url) values (%s,%s,%s,%s,%s,%s,%s)"
         val = (video_author, video_link1, i[1], i[2], i[0], imglink, url_video)
 
@@ -147,8 +148,7 @@ def get_all_video_url(video_url):
 
     try:
         print(video_url)
-        cursor.execute("truncate YouTubers_Table")
-        conn.commit()
+        
         print('ok')
 
         db = client['YouTube_Video_Data']
@@ -176,7 +176,7 @@ def get_all_video_url(video_url):
             print(url_video, final_url,count)
             data = video_data(url_video, final_url)
 
-            if count == 5:
+            if count == 10:
                 break
 
             count += 1
