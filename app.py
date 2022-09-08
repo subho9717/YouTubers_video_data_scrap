@@ -32,11 +32,13 @@ def youtube():  # put application's code here
 
     if videourl :
         data = get_all_video_url(videourl)
-        cursor.execute("select * from YouTubers_Table")
+        cursor.execute("select * from YouTubers_Table where Video_watch_url = '%s'"%data)
         fnl_data = [r for r in cursor.fetchall()]
 
         print(fnl_data)
-        return render_template("index.html",data=fnl_data)
+        return redirect(url_for('/'))
+        # return jsonify({data: fnl_data})
+        # return render_template("index.html",data=fnl_data)
 
     return jsonify({'error': 'Missing data!'})
 
