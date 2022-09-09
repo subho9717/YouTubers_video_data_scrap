@@ -16,7 +16,7 @@ $(document).ready(function(){
 })
 
   $('#videourl').on('submit',function(e){
-    // $('#preloader').show()
+    $('#preloader').show()
     // alert($('#urlid').val())
       url = $('#urlid').val()
       $.ajax({
