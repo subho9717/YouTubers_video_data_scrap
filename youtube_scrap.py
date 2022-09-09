@@ -132,8 +132,8 @@ def video_data(url_video, final_url):
             # 'title': url_video+'.'+str(vfname).split('.')[1],
             'parents': [{'id': videofolder}]
         })
-        file6.SetContentFile(path)
-        file6.Upload()
+        # file6.SetContentFile(path)
+        # file6.Upload()
 
     print('successfully')
     for i in mqldata1:
