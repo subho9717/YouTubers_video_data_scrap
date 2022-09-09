@@ -176,7 +176,7 @@ def get_all_video_url(video_url):
             print(url_video, final_url,count)
             data = video_data(url_video, final_url)
 
-            if count == 10:
+            if count == 5:
                 break
 
             count += 1
