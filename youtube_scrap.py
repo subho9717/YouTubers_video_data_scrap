@@ -38,6 +38,7 @@ def video_data(url_video, final_url):
     title_data = youtube.videos().list(part='snippet,contentDetails,statistics', id=url_video).execute()
     for t in title_data['items']:
         title = t["snippet"]["title"]
+        title = str(title).replace("?", "_").replace("|", "_").replace("/", "_").replace("'\'", "_").replace("~", "_").replace("`", "_").replace("!", "_").replace("@", "_").replace("#", "_").replace("$", "_").replace("%", "_").replace("^", "_").replace("&", "_").replace("*", "_").replace("(", "_").replace(")", "_").replace("-", "_").replace("+", "_").replace("=", "_").replace(":", "_").replace(";", "_").replace('"""', "_").replace("'", "_").replace(",", "_").replace("<", "_").replace(">", "_")
         likeCount = t['statistics']['likeCount']
         commentCount = t['statistics']['commentCount']
         thumbnails = t["snippet"]['thumbnails']['high']['url']
@@ -70,7 +71,7 @@ def video_data(url_video, final_url):
     ##########################################Image
     imglink = thumbnails
     image = requests.get(imglink).content
-    img_title = str(title).replace(" ", "_").replace("?", "_").replace("|", "_").replace("/", "_").replace("'\'", "_").replace("~", "_").replace("`", "_").replace("!", "_").replace("@", "_").replace("#", "_").replace("$", "_").replace("%", "_").replace("^", "_").replace("&", "_").replace("*", "_").replace("(", "_").replace(")", "_").replace("-", "_").replace("+", "_").replace("=", "_").replace(":", "_").replace(";", "_").replace('"""', "_").replace("'", "_").replace(",", "_").replace("<", "_").replace(">", "_")
+    img_title = str(title).replace("?", "_").replace("|", "_").replace("/", "_").replace("'\'", "_").replace("~", "_").replace("`", "_").replace("!", "_").replace("@", "_").replace("#", "_").replace("$", "_").replace("%", "_").replace("^", "_").replace("&", "_").replace("*", "_").replace("(", "_").replace(")", "_").replace("-", "_").replace("+", "_").replace("=", "_").replace(":", "_").replace(";", "_").replace('"""', "_").replace("'", "_").replace(",", "_").replace("<", "_").replace(">", "_")
     # imgtitle = r"media/images/" + img_title + '.jpg'
     imgtitleg ='media/images/'+ img_title + '.jpg'
     # with open(imgtitle, "wb") as file:
@@ -94,7 +95,7 @@ def video_data(url_video, final_url):
             for i in box:
                 for j in mqldata1:
                     data = {'Author': video_author,
-                            'title':j[0],
+                            'title':j[0].replace(" ", "_").replace("?", "_").replace("|", "_").replace("/", "_").replace("'\'", "_").replace("~", "_").replace("`", "_").replace("!", "_").replace("@", "_").replace("#", "_").replace("$", "_").replace("%", "_").replace("^", "_").replace("&", "_").replace("*", "_").replace("(", "_").replace(")", "_").replace("-", "_").replace("+", "_").replace("=", "_").replace(":", "_").replace(";", "_").replace('"""', "_").replace("'", "_").replace(",", "_").replace("<", "_").replace(">", "_"),
                             'Commenter_Name': i[0],
                             'Comment': i[1],
                             'thumbnail':encoded_string,

@@ -32,7 +32,7 @@ def index():  # put application's code here
 def youtube():  # put application's code here
     if request.method == "POST":
 
-        videourl = request.form['data']
+        videourl = request.form['videourl']
         print(videourl)
         print('ok')
         
