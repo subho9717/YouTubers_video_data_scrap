@@ -1,3 +1,4 @@
+from email.message import Message
 from flask import Flask,render_template,request,redirect,url_for,jsonify
 from pytube import YouTube
 from mysql.connector import  connect
@@ -29,20 +30,25 @@ def index():  # put application's code here
 
 @app.route('/video_url',methods=["POST","GET"])
 def youtube():  # put application's code here
+    if request.method == "POST":
 
-    videourl = request.form['videourl']
-
-    if videourl :
+        videourl = request.form['data']
+        print(videourl)
+        print('ok')
+        
         cursor.execute("truncate YouTubers_Table")
         conn.commit()
+        
         data = get_all_video_url(videourl)
         cursor.execute("select * from YouTubers_Table where Video_watch_url = '%s'"%data)
         fnl_data = [r for r in cursor.fetchall()]
 
         print(fnl_data)
-        return redirect(url_for('index',data=fnl_data))
-        # # return jsonify({data: fnl_data})
-        return render_template("index.html",data=fnl_data)
+        # return redirect(url_for('index',data=fnl_data))
+        # return jsonify({'data': videourl})
+        return url_for('index')
+        
+        # return render_template("index.html",data=fnl_data)
 
     return render_template("index.html",data=fnl_data)
 
@@ -67,4 +73,4 @@ def comment():  # put application's code here
     return render_template("index.html")
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
