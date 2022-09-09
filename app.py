@@ -44,13 +44,13 @@ def youtube():  # put application's code here
         fnl_data = [r for r in cursor.fetchall()]
 
         print(fnl_data)
-        # return redirect(url_for('index',data=fnl_data))
+        return redirect(url_for('index',data=fnl_data))
         # return jsonify({'data': videourl})
-        return url_for('index')
+        # return url_for('index')
         
         # return render_template("index.html",data=fnl_data)
 
-    return render_template("index.html",data=fnl_data)
+    return render_template("index.html")
 
 @app.route('/video_comment',methods=["POST","GET"])
 def comment():  # put application's code here

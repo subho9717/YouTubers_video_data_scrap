@@ -15,22 +15,22 @@ $(document).ready(function(){
   }
 })
 
-  $('#videourl').on('submit',function(e){
+  // $('#videourl').on('submit',function(e){
     // $('#preloader').show()
     // alert($('#urlid').val())
-      url = $('#urlid').val()
-      $.ajax({
-        url: "/video_url",
-        type: "POST",
-        data: {'data':url},
-                
-      }).done(function(data){
-        console.log(data) 
-        window.location = data;
-       })
-      e.preventDefault();
-      
-      
-  });
+  //     url = $('#urlid').val()
+  //     $.ajax({
+  //       url: "/video_url",
+  //       type: "POST",
+  //       data: {'data':url},
+  //
+  //     }).done(function(data){
+  //       console.log(data)
+  //       window.location = data;
+  //      })
+  //     e.preventDefault();
+  //
+  //
+  // });
 
   })
