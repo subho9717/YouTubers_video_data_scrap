@@ -1,0 +1,4 @@
+.idea
+venv/
+Procfile
+app.py
