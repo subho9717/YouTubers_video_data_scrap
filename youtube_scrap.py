@@ -104,28 +104,22 @@ def video_data(url_video, final_url):
         ######################################################
         videofolder = '1qDl8vUE3qy0yBhxTIz1ztfNQ3KDsWVB4'
         youtube_1 = YouTube(final_url)
-        # # print(youtube_1.thumbnail_url)
-        # videos_1 = youtube_1.streams.filter(file_extension='mp4')
         videos_1 = youtube_1.streams.all()
-        # print(videos_1)
         vid = list(enumerate(videos_1))
         strm = 0
         videos_1[strm].download("media/video/")
-
         dir = r"media/video"
         all_files = os.listdir(dir)
 
         for f in all_files:
             path = os.path.join(dir, f)
             vfname = str(f).replace(" ", "_").replace("?", "_").replace("|", "_").replace("/", "_").replace("'\'", "_").replace("~", "_").replace("`", "_").replace("!", "_").replace("@", "_").replace("#", "_").replace("$", "_").replace("%", "_").replace("^", "_").replace("&", "_").replace("*", "_").replace("(", "_").replace(")", "_").replace("-", "_").replace("+", "_").replace("=", "_").replace(":", "_").replace(";", "_").replace('"""', "_").replace("'", "_").replace(",", "_").replace("<", "_").replace(">", "_")
-            # print(vfname)
             file6 = drive.CreateFile({
                 'title':vfname,
-                # 'title': url_video+'.'+str(vfname).split('.')[1],
                 'parents': [{'id': videofolder}]
             })
-            # file6.SetContentFile(path)
-            # file6.Upload()
+            file6.SetContentFile(path)
+            file6.Upload()
 
         print('successfully')
     
@@ -180,7 +174,6 @@ def get_all_video_url(video_url):
 
             final_url = str(r)
             url_video = str(r)[-11:]
-            # print(url_video, final_url,count)
             data = video_data(url_video, final_url)
 
             if count == 5:
@@ -195,4 +188,4 @@ def get_all_video_url(video_url):
         print(e)
     conn.close()
 
-get_all_video_url('https://www.youtube.com/c/HiteshChoudharydotcom/videos')
+# get_all_video_url('https://www.youtube.com/c/HiteshChoudharydotcom/videos')
