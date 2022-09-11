@@ -1,2 +1,4 @@
 .idea
 venv/
+application.py
+__pychache__
