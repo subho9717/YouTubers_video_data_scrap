@@ -1,3 +1,4 @@
+from time import time
 import requests
 from pytube import YouTube,Channel
 from googleapiclient.discovery import build
@@ -10,6 +11,7 @@ from mysql.connector import  connect
 import base64
 import pymongo
 import threading
+import time
 
 drive = GoogleDrive(gauth)
 
@@ -145,9 +147,19 @@ def video_data(url_video, final_url):
     t3.join()
     t2.join()
 
-def get_all_video_url(video_url):
+def gdive_delete():
+    videofolder = '1qDl8vUE3qy0yBhxTIz1ztfNQ3KDsWVB4'
+    folder = "\'" + videofolder + "\'" + " in parents and trashed=false" 
+    file_list = drive.ListFile({'q': folder}).GetList()
+    for file1 in file_list:
+        file = drive.CreateFile({'id':file1['id']})
+        file.Delete()
+
+def get_all_video_url(video_url,videounum):
 
     try:
+        print(videounum)
+        t=time.time()
         # print(video_url)
         
         # print('ok')
@@ -158,8 +170,8 @@ def get_all_video_url(video_url):
 
         c = Channel(video_url)
         count = 0
+        gdive_delete()
         for r in c:
-            # print(r)
             dir = r"./media/images"
             all_files = os.listdir(dir)
             for f in all_files:
@@ -176,16 +188,18 @@ def get_all_video_url(video_url):
             url_video = str(r)[-11:]
             data = video_data(url_video, final_url)
 
-            if count == 5:
+            if count == int(videounum)-1:
                 break
 
             count += 1
 
             print('completed')
+        dura = time.time()-t
+        print('done : ',time.strftime("%H:%M:%S", time.gmtime(dura)))
+
             # return data
     except Exception as e:
         pass
         print(e)
-    conn.close()
 
 # get_all_video_url('https://www.youtube.com/c/HiteshChoudharydotcom/videos')

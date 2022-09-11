@@ -34,17 +34,19 @@ def youtube():  # put application's code here
     if request.method == "POST":
 
         videourl = request.form['videourl']
+        videounum = request.form['videounum']
+
         print(videourl)
-        print('ok')
+        
         
         cursor.execute("truncate YouTubers_Table")
         conn.commit()
         
-        data = get_all_video_url(videourl)
+        data = get_all_video_url(videourl,videounum)
         cursor.execute("select * from YouTubers_Table where Video_watch_url = '%s'"%data)
         fnl_data = [r for r in cursor.fetchall()]
 
-        print(fnl_data)
+        
         return redirect(url_for('index',data=fnl_data))
         # return jsonify({'data': videourl})
         # return url_for('index')
@@ -64,7 +66,6 @@ def comment():  # put application's code here
         fnldata = []
         for r in data:
             fnldata.append([r['Commenter_Name'],r['Comment']])
-        print(fnldata)
 
 
    
@@ -74,4 +75,4 @@ def comment():  # put application's code here
     return render_template("index.html")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
