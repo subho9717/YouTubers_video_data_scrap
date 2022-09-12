@@ -17,19 +17,19 @@ $(document).ready(function(){
 
   $('#videourlform').on('submit',function(e){
     $('#preloader').show()
-    // alert($('#urlid').val())
-    videourl = $('#videourl').val()
-    videounum = $('#videounum').val()
-      $.ajax({
-        url: "/video_url",
-        type: "POST",
-        data: {'videourl':videourl,'videounum':videounum},
+    // alert($('#videourl').val(),$('#videounum').val())
+    // videourl = $('#videourl').val()
+    // videounum = $('#videounum').val()
+    //   $.ajax({
+    //     url: "/video_url",
+    //     type: "POST",
+    //     data: {'videourl':videourl,'videounum':videounum},
 
-      }).done(function(data){
-        console.log(data)
-        window.location = data;
-       })
-      e.preventDefault();
+    //   }).done(function(data){
+    //     console.log(data)
+    //     window.location = data;
+    //    })
+    //   e.preventDefault();
   //
   //
   });
