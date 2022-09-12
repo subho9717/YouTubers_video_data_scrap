@@ -15,11 +15,13 @@ import time
 
 drive = GoogleDrive(gauth)
 
+#google api key
 api_key = 'AIzaSyByQMt4VH7I4BylDHElcxxilZVFhMwWWAc'
 youtube = build('youtube', 'v3', developerKey=api_key)
 
 box = []
 
+#mysql connection
 conn = connect(
     host="youtube-data.cgje4yzuebxp.us-east-1.rds.amazonaws.com",
     user="admin",
@@ -28,15 +30,21 @@ conn = connect(
 )
 cursor = conn.cursor()
 
+#mongo db connection
 client = pymongo.MongoClient("mongodb+srv://subho9717:subho9717@ineuron.8npdrfs.mongodb.net/?retryWrites=true&w=majority")
 
 
 def video_data(url_video, final_url):
     # video link
     # print(url_video,final_url)
+    
+    #video link 
     video_link1 = final_url
+
+    #youtuber name extract
     video_author = YouTube(final_url).author
 
+    #for extract the title,video like count ,comment count, thumbnail of video url from  video url
     mqldata1 =[]
     title_data = youtube.videos().list(part='snippet,contentDetails,statistics', id=url_video).execute()
     for t in title_data['items']:
@@ -51,6 +59,7 @@ def video_data(url_video, final_url):
     data = youtube.commentThreads().list(part='snippet', videoId=url_video, maxResults='100',
                                          textFormat="plainText").execute()
 
+    #for extract commenter name and comments
     for i in data["items"]:
         name = i["snippet"]['topLevelComment']["snippet"]["authorDisplayName"]
         comment = i["snippet"]['topLevelComment']["snippet"]["textDisplay"]
@@ -69,6 +78,7 @@ def video_data(url_video, final_url):
 
     
 
+    #upload youtubername,video title, commenter name,comments,thumbnaiand,video url data in mongodb 
     def mongo(thumbnails,title,mqldata1):
 
         ##########################################Image
@@ -100,6 +110,7 @@ def video_data(url_video, final_url):
                         coll = db['YouTubers_table']
                         coll.insert_one(data)
 
+    #upload video in google drive
 
     def video1(final_url):
 
@@ -125,6 +136,7 @@ def video_data(url_video, final_url):
 
         print('successfully')
     
+    #insert YouTubers_Name ,Video_Link ,Video_Likes , Number_Of_Comments ,Title_Of_Video ,Thumbnail_Of_Video_Link and Video_watch_url to mysql database
     def mysql(mqldata1,thumbnails,url_video):
         for i in mqldata1:
             
@@ -147,6 +159,7 @@ def video_data(url_video, final_url):
     # t3.join()
     t2.join()
 
+#delete from google drive data
 def gdive_delete():
     videofolder = '1qDl8vUE3qy0yBhxTIz1ztfNQ3KDsWVB4'
     folder = "\'" + videofolder + "\'" + " in parents and trashed=false" 
@@ -155,6 +168,8 @@ def gdive_delete():
         file = drive.CreateFile({'id':file1['id']})
         file.Delete()
 
+
+# main function
 def get_all_video_url(video_url,videounum):
 
     try:
@@ -163,37 +178,52 @@ def get_all_video_url(video_url,videounum):
         # print(video_url)
         
         # print('ok')
-
+        #delete table of mongo for new table 
         db = client['YouTube_Video_Data']
         col = db['YouTubers_table']
         col.drop()
 
+
+        #id from flask app
         c = Channel(video_url)
+
         count = 0
+
+        #function for delete all video in google drive
         gdive_delete()
         for r in c:
+
+            #delete all images from local folder after upload in mongo
             dir = r"./media/images"
             all_files = os.listdir(dir)
             for f in all_files:
                 path = os.path.join(dir, f)
                 os.remove(path)
 
+            #delete all images from local folder after upload in google drive
             dir = r"./media/video"
             all_files = os.listdir(dir)
             for f in all_files:
                 path = os.path.join(dir, f)
                 os.remove(path)
 
+            #chanel all videos link
             final_url = str(r)
+            #extract video id from channel video link
             url_video = str(r)[-11:]
+
+            # function for extract video data
             data = video_data(url_video, final_url)
 
+            #cont for one by one video data extract
             if count == int(videounum)-1:
                 break
 
             count += 1
 
             print('completed')
+        
+        #for chrck the time for video rxtract
         dura = time.time()-t
         print('done : ',time.strftime("%H:%M:%S", time.gmtime(dura)))
 

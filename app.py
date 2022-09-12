@@ -23,6 +23,7 @@ client = pymongo.MongoClient(
 @app.route('/', methods=['POST', 'GET'])
 def index():  # put app's code here
 
+    #mysql data fetch
     cursor.execute("select * from YouTubers_Table")
     fnl_data = [r for r in cursor.fetchall()]
 
@@ -36,9 +37,11 @@ def youtube():  # put app's code here
         videounum = request.form['videounum']
         # print(videourl,videounum)
 
+        # delete all data from mysql
         cursor.execute("truncate YouTubers_Table")
         conn.commit()
 
+        #mysql data fetch
         data = get_all_video_url(videourl, videounum)
         cursor.execute("select * from YouTubers_Table where Video_watch_url = '%s'" % data)
         fnl_data = [r for r in cursor.fetchall()]
@@ -54,6 +57,8 @@ def youtube():  # put app's code here
 
 @app.route('/video_comment', methods=["POST", "GET"])
 def comment():  # put app's code here
+
+    #fetch data from mongodb
     comm = request.form['comment']
     if comm:
         db = client['YouTube_Video_Data']
