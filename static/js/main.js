@@ -15,10 +15,10 @@ $(document).ready(function(){
   }
 })
 
-  $('#videourl').on('submit',function(e){
+  $('#videourlform').on('submit',function(e){
     $('#preloader').show()
     // alert($('#urlid').val())
-    videourl = $('#urlid').val()
+    videourl = $('#videourl').val()
     videounum = $('#videounum').val()
       $.ajax({
         url: "/video_url",
