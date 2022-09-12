@@ -35,7 +35,7 @@ def youtube():  # put app's code here
     if request.method == "POST":
         videourl = request.form['videourl']
         videounum = request.form['videounum']
-        # print(videourl,videounum)
+        print(videourl,videounum)
 
         # delete all data from mysql
         cursor.execute("truncate YouTubers_Table")
