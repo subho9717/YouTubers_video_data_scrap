@@ -120,8 +120,8 @@ def video_data(url_video, final_url):
                 'title':vfname,
                 'parents': [{'id': videofolder}]
             })
-            # file6.SetContentFile(path)
-            # file6.Upload()
+            file6.SetContentFile(path)
+            file6.Upload()
 
         print('successfully')
     
@@ -137,14 +137,14 @@ def video_data(url_video, final_url):
     print(final_url)
     t1 = threading.Thread(target=mongo,args=(thumbnails,title,mqldata1))
     t2 = threading.Thread(target=mysql,args=(mqldata1,thumbnails,url_video))
-    t3 = threading.Thread(target=video1,args=(final_url,))
+    # t3 = threading.Thread(target=video1,args=(final_url,))
 
     t1.start()
-    t3.start()
+    # t3.start()
     t2.start()
 
     t1.join()
-    t3.join()
+    # t3.join()
     t2.join()
 
 def gdive_delete():
@@ -202,4 +202,4 @@ def get_all_video_url(video_url,videounum):
         pass
         print(e)
 
-# get_all_video_url('https://www.youtube.com/c/HiteshChoudharydotcom/videos')
+# get_all_video_url('https://www.youtube.com/c/HiteshChoudharydotcom/videos',1)

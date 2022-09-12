@@ -43,9 +43,9 @@ def youtube():  # put app's code here
         cursor.execute("select * from YouTubers_Table where Video_watch_url = '%s'" % data)
         fnl_data = [r for r in cursor.fetchall()]
 
-        return redirect(url_for('index', data=fnl_data))
+        # return redirect(url_for('index', data=fnl_data))
         # return jsonify({'data': videourl})
-        # return url_for('index')
+        return url_for('index')
 
         # return render_template("index.html",data=fnl_data)
 

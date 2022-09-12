@@ -18,17 +18,18 @@ $(document).ready(function(){
   $('#videourl').on('submit',function(e){
     $('#preloader').show()
     // alert($('#urlid').val())
-  //     url = $('#urlid').val()
-  //     $.ajax({
-  //       url: "/video_url",
-  //       type: "POST",
-  //       data: {'data':url},
-  //
-  //     }).done(function(data){
-  //       console.log(data)
-  //       window.location = data;
-  //      })
-  //     e.preventDefault();
+    videourl = $('#urlid').val()
+    videounum = $('#videounum').val()
+      $.ajax({
+        url: "/video_url",
+        type: "POST",
+        data: {'videourl':videourl,'videounum':videounum},
+
+      }).done(function(data){
+        console.log(data)
+        window.location = data;
+       })
+      e.preventDefault();
   //
   //
   });
