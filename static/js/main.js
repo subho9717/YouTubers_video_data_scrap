@@ -17,9 +17,11 @@ $(document).ready(function(){
 
   $('#videourlform').on('submit',function(e){
     $('#preloader').show()
+
     // alert($('#videourl').val(),$('#videounum').val())
-    // videourl = $('#videourl').val()
-    // videounum = $('#videounum').val()
+    videourl = $('#videourl').val()
+    videounum = $('#videounum').val()
+    console.log(videounum,videourl)
     //   $.ajax({
     //     url: "/video_url",
     //     type: "POST",
