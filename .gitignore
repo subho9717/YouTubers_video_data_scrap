@@ -2,3 +2,4 @@
 venv/
 application.py
 __pycache__
+Procfile
